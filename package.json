@@ -1,13 +1,19 @@
 {
-  "name": "turndowncli",
+  "name": "turndown-cli",
   "version": "0.1.0",
   "description": "A CLI for the turndown HTML to Markdown converter.",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
+  "bin": "bin/turndown-cli",
+  "pkg": {
+    "targets": [ "node18-linux-arm64", "node18-macos-x64", "node18-macos-arm64" ],
+    "outputPath": "bin"
+  },
   "scripts": {
     "build": "npx tsc",
+    "pkg": "npx pkg . --out-path bin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +21,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.3.3",
+    "pkg": "^5.8.1",
     "typescript": "^5.1.6"
   },
   "dependencies": {
