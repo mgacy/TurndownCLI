@@ -9,11 +9,11 @@
   "bin": "bin/turndown-cli",
   "pkg": {
     "targets": [ "node18-linux-arm64", "node18-macos-x64", "node18-macos-arm64" ],
-    "outputPath": "bin"
+    "outputPath": "dist"
   },
   "scripts": {
     "build": "npx tsc",
-    "pkg": "npx pkg . --out-path bin",
+    "pkg": "npx pkg . --out-path dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
