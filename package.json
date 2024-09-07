@@ -1,6 +1,6 @@
 {
   "name": "turndown-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A CLI for the turndown HTML to Markdown converter.",
   "main": "index.js",
   "directories": {
@@ -12,6 +12,7 @@
     "outputPath": "dist"
   },
   "scripts": {
+    "prebuild": "node -p \"'export const LIB_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
     "build": "npx tsc",
     "pkg": "npx pkg . --out-path dist",
     "test": "echo \"Error: no test specified\" && exit 1"
