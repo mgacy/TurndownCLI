@@ -1,12 +1,13 @@
 import TurndownService from "turndown";
 import { Command, Option } from "@commander-js/extra-typings";
 import { type } from "os";
+import { LIB_VERSION } from "./version";
 var turndownPluginGfm = require("turndown-plugin-gfm");
 
 const program = new Command()
   .name("turndown-cli")
   .description("Convert HTML to Markdown")
-  .version("0.1.0")
+  .version(LIB_VERSION)
   .argument("<html>", "HTML string or file path")
   .action((html: string, options) => {
     const markdown = markdownify(html);
