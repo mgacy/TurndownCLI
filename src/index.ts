@@ -2,6 +2,7 @@ import TurndownService from "turndown";
 import { Command, Option } from "@commander-js/extra-typings";
 import { type } from "os";
 import { LIB_VERSION } from "./version";
+import * as fs from "fs";
 var turndownPluginGfm = require("turndown-plugin-gfm");
 
 // Option Choices
@@ -64,7 +65,12 @@ const program = new Command()
     ).choices(LinkReferenceStyles)
   )
   .action((html: string, options) => {
-    const markdown = markdownify(html, options);
+    let htmlContent = html;
+    if (fs.existsSync(html)) {
+      htmlContent = fs.readFileSync(html, "utf-8");
+    }
+
+    const markdown = markdownify(htmlContent, options);
 
     console.log(markdown);
   });

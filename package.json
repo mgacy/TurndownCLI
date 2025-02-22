@@ -1,6 +1,6 @@
 {
   "name": "turndown-cli",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A CLI for the turndown HTML to Markdown converter.",
   "main": "index.js",
   "directories": {
