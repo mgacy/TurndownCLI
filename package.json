@@ -8,22 +8,30 @@
   },
   "bin": "bin/turndown-cli",
   "pkg": {
-    "targets": [ "node18-linux-arm64", "node18-macos-x64", "node18-macos-arm64" ],
+    "targets": [
+      "node18-linux-arm64",
+      "node18-macos-x64",
+      "node18-macos-arm64"
+    ],
     "outputPath": "dist"
   },
   "scripts": {
     "prebuild": "node -p \"'export const LIB_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
     "build": "npx tsc",
     "pkg": "npx pkg . --out-path dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run"
   },
   "keywords": [],
   "author": "Mathew Gacy",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.3.3",
+    "@vitest/ui": "^4.0.13",
     "pkg": "^5.8.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^4.0.13"
   },
   "dependencies": {
     "@commander-js/extra-typings": "^11.0.0",
