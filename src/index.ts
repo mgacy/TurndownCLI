@@ -87,6 +87,12 @@ const program = new Command()
     console.log(markdown);
   });
 
+/**
+ * Converts HTML to Markdown using Turndown with GFM support.
+ * @param html - The HTML string to convert
+ * @param options - Optional Turndown configuration options
+ * @returns Markdown string
+ */
 function markdownify(html: string, options?: TurndownService.Options): string {
   const turndownService = new TurndownService(options);
 
