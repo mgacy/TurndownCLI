@@ -108,7 +108,7 @@
   },
   "exclude": [
     "tests",
-    "vitest.config.ts",
+    "vitest.config.mts",
     "node_modules"
   ]
 }
