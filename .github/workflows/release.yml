@@ -59,6 +59,11 @@ jobs:
           /usr/bin/codesign --force -s "$MACOS_CERTIFICATE_NAME" dist/turndown-cli-macos-arm64 -v
           /usr/bin/codesign --force -s "$MACOS_CERTIFICATE_NAME" dist/turndown-cli-macos-x64 -v
 
+      - name: Verify codesign
+        run: |
+          codesign --verify --verbose dist/turndown-cli-macos-arm64
+          codesign --verify --verbose dist/turndown-cli-macos-x64
+
       - name: Cleanup certificates
         if: always()
         run: |
@@ -109,6 +114,7 @@ jobs:
         run: |
           ./dist/turndown-cli-linux-x64 --version
           echo "<h1>Test</h1>" | ./dist/turndown-cli-linux-x64
+          # Note: ARM64 binary cannot be tested on x64 runner without QEMU
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v6
@@ -137,9 +143,18 @@ jobs:
           name: linux-binaries
           path: dist
 
+      - name: Verify artifacts
+        run: |
+          ls -lh dist/
+          test -f dist/turndown-cli-macos-arm64
+          test -f dist/turndown-cli-macos-x64
+          test -f dist/turndown-cli-linux-arm64
+          test -f dist/turndown-cli-linux-x64
+
       - name: Generate checksums
         run: |
           cd dist
+          # Generate SHA256 checksums for release verification
           sha256sum turndown-cli-* > SHA256SUMS
 
       - name: Release
