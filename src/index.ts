@@ -1,6 +1,5 @@
 import TurndownService from "turndown";
 import { Command, Option } from "@commander-js/extra-typings";
-import { type } from "os";
 import { LIB_VERSION } from "./version";
 import * as fs from "fs";
 var turndownPluginGfm = require("turndown-plugin-gfm");
@@ -70,11 +69,11 @@ const program = new Command()
       try {
         htmlContent = fs.readFileSync(html, "utf-8");
       } catch (err: any) {
-        if (err.code === 'ENOENT') {
+        if (err.code === "ENOENT") {
           console.error(`Error: File not found: ${html}`);
-        } else if (err.code === 'EACCES') {
+        } else if (err.code === "EACCES") {
           console.error(`Error: Permission denied: ${html}`);
-        } else if (err.code === 'EISDIR') {
+        } else if (err.code === "EISDIR") {
           console.error(`Error: Expected a file but got a directory: ${html}`);
         } else {
           console.error(`Error reading file ${html}: ${err.message}`);
