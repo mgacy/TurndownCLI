@@ -29,6 +29,9 @@ jobs:
       - name: Security audit
         run: npm audit --audit-level=high
 
+      - name: Generate version file
+        run: npm run prebuild
+
       - name: Type check
         run: npx tsc --noEmit
 
