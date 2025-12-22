@@ -67,7 +67,20 @@ const program = new Command()
   .action((html: string, options) => {
     let htmlContent = html;
     if (fs.existsSync(html)) {
-      htmlContent = fs.readFileSync(html, "utf-8");
+      try {
+        htmlContent = fs.readFileSync(html, "utf-8");
+      } catch (err: any) {
+        if (err.code === 'ENOENT') {
+          console.error(`Error: File not found: ${html}`);
+        } else if (err.code === 'EACCES') {
+          console.error(`Error: Permission denied: ${html}`);
+        } else if (err.code === 'EISDIR') {
+          console.error(`Error: Expected a file but got a directory: ${html}`);
+        } else {
+          console.error(`Error reading file ${html}: ${err.message}`);
+        }
+        process.exit(1);
+      }
     }
 
     const markdown = markdownify(htmlContent, options);
