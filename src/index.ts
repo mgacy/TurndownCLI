@@ -1,6 +1,5 @@
 import TurndownService from "turndown";
 import { Command, Option } from "@commander-js/extra-typings";
-import { type } from "os";
 import { LIB_VERSION } from "./version";
 import * as fs from "fs";
 var turndownPluginGfm = require("turndown-plugin-gfm");
@@ -67,7 +66,20 @@ const program = new Command()
   .action((html: string, options) => {
     let htmlContent = html;
     if (fs.existsSync(html)) {
-      htmlContent = fs.readFileSync(html, "utf-8");
+      try {
+        htmlContent = fs.readFileSync(html, "utf-8");
+      } catch (err: any) {
+        if (err.code === "ENOENT") {
+          console.error(`Error: File not found: ${html}`);
+        } else if (err.code === "EACCES") {
+          console.error(`Error: Permission denied: ${html}`);
+        } else if (err.code === "EISDIR") {
+          console.error(`Error: Expected a file but got a directory: ${html}`);
+        } else {
+          console.error(`Error reading file ${html}: ${err.message}`);
+        }
+        process.exit(1);
+      }
     }
 
     const markdown = markdownify(htmlContent, options);
@@ -75,6 +87,12 @@ const program = new Command()
     console.log(markdown);
   });
 
+/**
+ * Converts HTML to Markdown using Turndown with GFM support.
+ * @param html - The HTML string to convert
+ * @param options - Optional Turndown configuration options
+ * @returns Markdown string
+ */
 function markdownify(html: string, options?: TurndownService.Options): string {
   const turndownService = new TurndownService(options);
 

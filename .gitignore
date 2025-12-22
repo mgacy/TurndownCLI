@@ -91,6 +91,9 @@ out
 .nuxt
 dist
 
+# Build output
+lib
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
@@ -129,6 +132,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 /src/version.ts
+vitest.config.js
 
 # User-specific configs
 .claude-tracking/
