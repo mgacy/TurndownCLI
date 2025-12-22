@@ -33,7 +33,6 @@ jobs:
           # pkg omits platform name when building single-platform targets
           mv dist/turndown-cli-arm64 dist/turndown-cli-macos-arm64
           mv dist/turndown-cli-x64 dist/turndown-cli-macos-x64
-          ls -la dist/
 
       # https://federicoterzi.com/blog/automatic-code-signing-and-notarization-for-macos-apps-using-github-actions/
       - name: Codesign
@@ -80,7 +79,7 @@ jobs:
           ./dist/turndown-cli-macos-arm64 --version
           ./dist/turndown-cli-macos-x64 --version
           # Test basic conversion
-          echo "<h1>Test</h1>" | ./dist/turndown-cli-macos-arm64
+          ./dist/turndown-cli-macos-arm64 "<h1>Test</h1>"
 
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v6
@@ -118,12 +117,11 @@ jobs:
           # pkg omits platform name when building single-platform targets
           mv dist/turndown-cli-arm64 dist/turndown-cli-linux-arm64
           mv dist/turndown-cli-x64 dist/turndown-cli-linux-x64
-          ls -la dist/
 
       - name: Verify Linux x64 executable
         run: |
           ./dist/turndown-cli-linux-x64 --version
-          echo "<h1>Test</h1>" | ./dist/turndown-cli-linux-x64
+          ./dist/turndown-cli-linux-x64 "<h1>Test</h1>"
           # Note: ARM64 binary cannot be tested on x64 runner without QEMU
 
       - name: Upload Linux artifacts
