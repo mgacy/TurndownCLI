@@ -30,7 +30,9 @@ jobs:
       - name: Package macOS binaries
         run: |
           npm run pkg:macos
-          echo "=== Files created by pkg ==="
+          # pkg omits platform name when building single-platform targets
+          mv dist/turndown-cli-arm64 dist/turndown-cli-macos-arm64
+          mv dist/turndown-cli-x64 dist/turndown-cli-macos-x64
           ls -la dist/
 
       # https://federicoterzi.com/blog/automatic-code-signing-and-notarization-for-macos-apps-using-github-actions/
@@ -113,7 +115,9 @@ jobs:
       - name: Package Linux binaries
         run: |
           npm run pkg:linux
-          echo "=== Files created by pkg ==="
+          # pkg omits platform name when building single-platform targets
+          mv dist/turndown-cli-arm64 dist/turndown-cli-linux-arm64
+          mv dist/turndown-cli-x64 dist/turndown-cli-linux-x64
           ls -la dist/
 
       - name: Verify Linux x64 executable
