@@ -23,6 +23,7 @@ npm run pkg
 
 Creates standalone executables in `dist/` for:
 - node18-linux-arm64
+- node18-linux-x64
 - node18-macos-x64
 - node18-macos-arm64
 
