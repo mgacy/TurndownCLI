@@ -28,7 +28,10 @@ jobs:
         run: npm run build
 
       - name: Package macOS binaries
-        run: npx pkg . --out-path dist --targets node18-macos-x64,node18-macos-arm64
+        run: |
+          npm run pkg:macos
+          echo "=== Files created by pkg ==="
+          ls -la dist/
 
       # https://federicoterzi.com/blog/automatic-code-signing-and-notarization-for-macos-apps-using-github-actions/
       - name: Codesign
@@ -108,7 +111,10 @@ jobs:
         run: npm run build
 
       - name: Package Linux binaries
-        run: npx pkg . --out-path dist --targets node18-linux-arm64,node18-linux-x64
+        run: |
+          npm run pkg:linux
+          echo "=== Files created by pkg ==="
+          ls -la dist/
 
       - name: Verify Linux x64 executable
         run: |

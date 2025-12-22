@@ -20,6 +20,8 @@
     "prebuild": "node -p \"'export const LIB_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
     "build": "npx tsc",
     "pkg": "npx pkg . --out-path dist",
+    "pkg:macos": "npx pkg . --out-path dist --targets node18-macos-x64,node18-macos-arm64",
+    "pkg:linux": "npx pkg . --out-path dist --targets node18-linux-arm64,node18-linux-x64",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run"
