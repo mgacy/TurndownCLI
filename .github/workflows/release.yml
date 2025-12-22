@@ -64,9 +64,11 @@ jobs:
           /usr/bin/codesign --force -s "$MACOS_CERTIFICATE_NAME" dist/turndown-cli-macos-arm64 -v
           /usr/bin/codesign --force -s "$MACOS_CERTIFICATE_NAME" dist/turndown-cli-macos-x64 -v
 
-          # Clean up sensitive files
+      - name: Cleanup certificates
+        if: always()
+        run: |
           rm -f certificate.p12
-          security delete-keychain build.keychain
+          security delete-keychain build.keychain || true
 
       - name: Verify executables
         run: |
