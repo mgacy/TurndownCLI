@@ -140,13 +140,13 @@ jobs:
       contents: write
     steps:
       - name: Download macOS artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: macos-binaries
           path: dist
 
       - name: Download Linux artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: linux-binaries
           path: dist
