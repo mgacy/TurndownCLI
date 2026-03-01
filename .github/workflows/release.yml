@@ -82,7 +82,7 @@ jobs:
           ./dist/turndown-cli-macos-arm64 "<h1>Test</h1>"
 
       - name: Upload macOS artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: macos-binaries
           path: |
@@ -125,7 +125,7 @@ jobs:
           # Note: ARM64 binary cannot be tested on x64 runner without QEMU
 
       - name: Upload Linux artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: linux-binaries
           path: |
@@ -140,13 +140,13 @@ jobs:
       contents: write
     steps:
       - name: Download macOS artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: macos-binaries
           path: dist
 
       - name: Download Linux artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           name: linux-binaries
           path: dist
