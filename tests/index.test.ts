@@ -1,16 +1,16 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'bun:test';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import { execSync } from 'child_process';
 
-// Path to the CLI executable
-const CLI_PATH = path.join(__dirname, '..', 'bin', 'turndown-cli');
+// Path to the CLI source (run directly via bun, no build step needed)
+const CLI_PATH = path.join(__dirname, '..', 'src', 'index.ts');
 
 // Helper function to run CLI and capture output
 function runCLI(args: string[]): { stdout: string; stderr: string; exitCode: number } {
   try {
-    const stdout = execSync(`node "${CLI_PATH}" ${args.map(arg => `"${arg}"`).join(' ')}`, {
+    const stdout = execSync(`bun "${CLI_PATH}" ${args.map(arg => `"${arg}"`).join(' ')}`, {
       encoding: 'utf-8',
       stdio: ['pipe', 'pipe', 'pipe'],
     });

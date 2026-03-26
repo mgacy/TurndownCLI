@@ -2,43 +2,23 @@
   "name": "turndown-cli",
   "version": "0.4.0",
   "description": "A CLI for the turndown HTML to Markdown converter.",
-  "main": "lib/index.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "bin": "bin/turndown-cli",
-  "pkg": {
-    "targets": [
-      "node18-linux-arm64",
-      "node18-linux-x64",
-      "node18-macos-x64",
-      "node18-macos-arm64"
-    ],
-    "outputPath": "dist"
-  },
   "scripts": {
-    "prebuild": "node -p \"'export const LIB_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
-    "build": "npx tsc",
-    "pkg": "npx pkg . --out-path dist",
-    "pkg:macos": "npx pkg . --out-path dist --targets node18-macos-x64,node18-macos-arm64",
-    "pkg:linux": "npx pkg . --out-path dist --targets node18-linux-arm64,node18-linux-x64",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:run": "vitest run"
+    "prebuild": "bun -p \"'export const LIB_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/version.ts",
+    "build": "bun build src/index.ts --compile --outfile dist/turndown-cli",
+    "build:macos": "bun run prebuild && bun build src/index.ts --compile --target bun-darwin-arm64 --outfile dist/turndown-cli-macos-arm64 && bun build src/index.ts --compile --target bun-darwin-x64 --outfile dist/turndown-cli-macos-x64",
+    "build:linux": "bun run prebuild && bun build src/index.ts --compile --target bun-linux-arm64 --outfile dist/turndown-cli-linux-arm64 && bun build src/index.ts --compile --target bun-linux-x64 --outfile dist/turndown-cli-linux-x64",
+    "test": "bun test"
   },
   "keywords": [],
   "author": "Mathew Gacy",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.3.3",
-    "@vitest/ui": "^4.0.13",
-    "pkg": "^5.8.1",
-    "typescript": "^5.1.6",
-    "vitest": "^4.0.13"
+    "@types/turndown": "^5.0.1",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "@commander-js/extra-typings": "^11.0.0",
-    "@types/turndown": "^5.0.1",
     "commander": "^11.0.0",
     "turndown": "^7.1.2",
     "turndown-plugin-gfm": "^1.0.2"

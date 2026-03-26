@@ -132,7 +132,9 @@ lib
 .yarn/install-state.gz
 .pnp.*
 /src/version.ts
-vitest.config.js
+
+# Bun build artifacts
+*.bun-build
 
 # User-specific configs
 .claude-tracking/

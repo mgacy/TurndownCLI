@@ -2,7 +2,7 @@
 
 A command-line interface for [Turndown](https://github.com/mixmark-io/turndown), an HTML to Markdown converter. TurndownCLI automatically applies GitHub Flavored Markdown (GFM) support via [turndown-plugin-gfm](https://github.com/mixmark-io/turndown-plugin-gfm).
 
-This is intended primarily to support [SwiftyTurndown](https://github.com/mgacy/swifty-turndown), a Swift package for converting HTML to Markdown. [pkg](https://github.com/vercel/pkg) is used to create executables for SwiftyTurndown to download and for which it serves as an interface.
+This is intended primarily to support [SwiftyTurndown](https://github.com/mgacy/swifty-turndown), a Swift package for converting HTML to Markdown. [Bun](https://bun.sh/) is used to compile standalone executables for SwiftyTurndown to download and for which it serves as an interface.
 
 ## Installation
 
@@ -11,14 +11,13 @@ Download the appropriate pre-built executable from the [releases page](https://g
 - `turndown-cli-macos-arm64` - macOS Apple Silicon (M1/M2/M3)
 - `turndown-cli-macos-x64` - macOS Intel
 
-Or build from source:
+Or build from source (requires [Bun](https://bun.sh/)):
 
 ```bash
 git clone https://github.com/mgacy/TurndownCLI.git
 cd TurndownCLI
-npm install
-npm run build
-npm run pkg
+bun install
+bun run build
 ```
 
 ## Usage
@@ -144,24 +143,25 @@ turndown-cli protected.html
 
 ## Development
 
+Requires [Bun](https://bun.sh/).
+
 ### Build
 
 ```bash
-npm run build  # Compiles TypeScript to JavaScript
+bun run build  # Compiles TypeScript into a standalone executable
 ```
 
-### Package
+### Cross-Platform Builds
 
 ```bash
-npm run pkg  # Creates standalone executables in dist/
+bun run build:macos  # Produces macOS arm64 and x64 executables
+bun run build:linux  # Produces Linux arm64 and x64 executables
 ```
 
 ### Test
 
 ```bash
-npm test        # Run tests in watch mode
-npm run test:ui # Run tests with UI
-npm run test:run # Run tests once
+bun test  # Run tests
 ```
 
 ## License

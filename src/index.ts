@@ -2,7 +2,7 @@ import TurndownService from "turndown";
 import { Command, Option } from "@commander-js/extra-typings";
 import { LIB_VERSION } from "./version";
 import * as fs from "fs";
-var turndownPluginGfm = require("turndown-plugin-gfm");
+import { gfm } from "turndown-plugin-gfm";
 
 // Option Choices
 const BulletListMarkers = ["-", "+", "*"] as const;
@@ -97,7 +97,6 @@ function markdownify(html: string, options?: TurndownService.Options): string {
   const turndownService = new TurndownService(options);
 
   // GFM
-  var gfm = turndownPluginGfm.gfm;
   turndownService.use(gfm);
 
   return turndownService.turndown(html);
